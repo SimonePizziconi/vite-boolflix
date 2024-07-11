@@ -5,8 +5,14 @@ import {store} from "./store.js";
 // importiamo axios
 import axios from "axios";
 
+// Importiamo i componenti
+import AppHeader from "./components/AppHeader.vue";
+
 export default{
   name: "App",
+  components: {
+    AppHeader,
+  },
   data (){
     return {
       store,
@@ -14,8 +20,17 @@ export default{
   },
   methods: {
     getCharacters(){
+      // Assegnamo Variabile all'EndPoint
+      let endPoint = store.apiURL;
+
+
+      // Condizione per fare una chiamata all'api richiesta
+      if(store.movieText !== ``){
+          endPoint += `${store.movieText}`
+          console.log(endPoint);
+      }
       axios.
-      get(store.apiURL)
+      get(endPoint)
       .then(result => {
         console.log("questo è un console log");
         store.movieList = result.data;
@@ -35,7 +50,7 @@ export default{
 
 
 <template>
-
+  <AppHeader @search="getCharacters"/>
 </template>
 
 <style scoped>
