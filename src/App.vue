@@ -8,12 +8,14 @@ import axios from "axios";
 // Importiamo i componenti
 import AppHeader from "./components/AppHeader.vue";
 import AppCardFilm from "./components/AppCardFilm.vue";
+import AppCardTvSeries from "./components/AppCardTvSeries.vue";
 
 export default{
   name: "App",
   components: {
     AppHeader,
     AppCardFilm,
+    AppCardTvSeries,
   },
   data (){
     return {
@@ -94,7 +96,11 @@ export default{
 <template>
   <AppHeader @search="getCharactersFilms"/>
   <main>
-    <AppCardFilm :movies="store.movieList" :tvSeries="store.tvSeriesList" :getFlagClass="getFlagClass" :convertVoteToFiveScale="convertVoteToFiveScale" :fullImageUrl="fullImageUrl"/>
+    <h1>FILM</h1>
+    <div class="container">
+      <AppCardFilm :movies="store.movieList" :tvSeries="store.tvSeriesList" :getFlagClass="getFlagClass" :convertVoteToFiveScale="convertVoteToFiveScale" :fullImageUrl="fullImageUrl"/>
+      <AppCardTvSeries :movies="store.movieList" :tvSeries="store.tvSeriesList" :getFlagClass="getFlagClass" :convertVoteToFiveScale="convertVoteToFiveScale" :fullImageUrl="fullImageUrl"/>
+    </div>
   </main>
   
 </template>
