@@ -33,7 +33,7 @@ export default{
       get(endPoint)
       .then(result => {
         console.log("questo è un console log");
-        store.movieList = result.data;
+        store.movieList = result.data.results;
         console.log(store.movieList);
       })
       .catch(error => {
@@ -43,7 +43,8 @@ export default{
   },
   created(){
     this.getCharacters();
-  }
+
+  },
 }
 </script>
 
