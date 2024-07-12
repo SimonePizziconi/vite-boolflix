@@ -28,7 +28,7 @@ export default{
         // Funzione per arrotonadare il numero da 1 a 5
         convertVoteToFiveScale(vote) {
             return Math.round(vote / 2);
-        }
+        },
     },
     computed:{
         fullImageUrl() {
@@ -48,7 +48,9 @@ export default{
             <h2>Il titolo è:{{ film.title }}</h2>
             <h2>Il titolo originale è:{{ film.original_title }}</h2>
             <span :class="getFlagClass(film.original_language)"></span>
-            <h2>{{ convertVoteToFiveScale(film.vote_average) }}</h2>
+            <div class="stars">
+                <span v-for="star in 5" :key="star" class="star" :class="{ selected: star <= convertVoteToFiveScale(film.vote_average) }">&#9733;</span>
+            </div>
         </li>
     </ul>
 
@@ -58,7 +60,9 @@ export default{
             <h2>il titolo è: {{ series.name }}</h2>
             <h2>Il titolo originale è:{{ series.original_name }}</h2>
             <span :class="getFlagClass(series.original_language)"></span>
-            <h2>{{ convertVoteToFiveScale(series.vote_average) }}</h2>
+            <div class="stars">
+                <span v-for="star in 5" :key="star" class="star" :class="{ selected: star <= convertVoteToFiveScale(series.vote_average) }">&#9733;</span>
+            </div>
         </li>
     </ul>
 </template>
@@ -71,5 +75,14 @@ export default{
     .tv-series{
         background-color: black;
         color: #fff;
+    }
+
+    .star {
+        font-size: 10px;
+        color: gray;
+    }   
+
+    .star.selected {
+        color: gold;
     }
 </style>
