@@ -66,9 +66,12 @@ export default{
 
 <template>
   <AppHeader @search="getCharactersFilms"/>
-  <AppCard/>
+  <main>
+    <AppCard/>
+  </main>
+  
 </template>
 
-<style scoped>
+<style>
 
 </style>
