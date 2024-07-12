@@ -3,41 +3,18 @@ import {store} from "../store.js";
 
 export default{
     name: "AppCard",
+    props: {
+        movies: Array,
+        tvSeries: Array,
+        getFlagClass: Function,
+        convertVoteToFiveScale: Function,
+        fullImageUrl: Function
+    },
     data(){
         return {
             store,
         }
     },
-    methods:{
-        // Funzione per gestire le bandiere
-        getFlagClass(language) {
-            if (language === 'it') {
-                return 'fi fi-it';
-            } else if (language === 'fr') {
-                return 'fi fi-fr';
-            } else if (language === 'es') {
-                return 'fi fi-es';
-            } else if (language === 'en') {
-                return 'fi fi-gb'; // Inghilterra
-            } else if (language === 'us') {
-                return 'fi fi-us'; // Stati Uniti
-            } else {
-                return 'fi fi-xx';
-            }
-        },
-        // Funzione per arrotonadare il numero da 1 a 5
-        convertVoteToFiveScale(vote) {
-            return Math.round(vote / 2);
-        },
-    },
-    computed:{
-        fullImageUrl() {
-            return function(path) {
-                let imgUrl = "https://image.tmdb.org/t/p/w342/";
-                return imgUrl + path;
-            };
-        } 
-    }   
 }
 </script>
 
@@ -54,7 +31,7 @@ export default{
         </li>
     </ul>
 
-    <ul class="tv-series">
+    <!-- <ul class="tv-series">
         <li v-for="series in store.tvSeriesList">
             <img :src="fullImageUrl(series.poster_path)" alt="">
             <h2>il titolo è: {{ series.name }}</h2>
@@ -64,7 +41,7 @@ export default{
                 <span v-for="star in 5" :key="star" class="star" :class="{ selected: star <= convertVoteToFiveScale(series.vote_average) }">&#9733;</span>
             </div>
         </li>
-    </ul>
+    </ul> -->
 </template>
 
 <style lang="scss" scoped>

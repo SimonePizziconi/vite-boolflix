@@ -7,13 +7,13 @@ import axios from "axios";
 
 // Importiamo i componenti
 import AppHeader from "./components/AppHeader.vue";
-import AppCard from "./components/AppCard.vue";
+import AppCardFilm from "./components/AppCardFilm.vue";
 
 export default{
   name: "App",
   components: {
     AppHeader,
-    AppCard,
+    AppCardFilm,
   },
   data (){
     return {
@@ -54,11 +54,38 @@ export default{
         console.log(error);
       }) 
     },
+    // Funzione per gestire le bandiere
+    getFlagClass(language) {
+      if (language === 'it') {
+          return 'fi fi-it';
+      } else if (language === 'fr') {
+          return 'fi fi-fr';
+      } else if (language === 'es') {
+          return 'fi fi-es';
+      } else if (language === 'en') {
+          return 'fi fi-gb'; // Inghilterra
+      } else if (language === 'us') {
+          return 'fi fi-us'; // Stati Uniti
+      } else {
+          return 'fi fi-xx';
+      }
+    },
+    // Funzione per arrotonadare il numero da 1 a 5
+    convertVoteToFiveScale(vote) {
+      return Math.round(vote / 2);
+    },
   },
   created(){
     this.getCharactersFilms();
-
   },
+  computed:{
+    fullImageUrl() {
+        return function(path) {
+            let imgUrl = "https://image.tmdb.org/t/p/w342/";
+            return imgUrl + path;
+        };
+    } 
+  }   
 }
 </script>
 
@@ -67,11 +94,16 @@ export default{
 <template>
   <AppHeader @search="getCharactersFilms"/>
   <main>
-    <AppCard/>
+    <AppCardFilm :movies="store.movieList" :tvSeries="store.tvSeriesList" :getFlagClass="getFlagClass" :convertVoteToFiveScale="convertVoteToFiveScale" :fullImageUrl="fullImageUrl"/>
   </main>
   
 </template>
 
 <style>
+
+  main{
+    background-color: #141414;
+  }
+
 
 </style>
