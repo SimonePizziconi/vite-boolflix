@@ -1,3 +1,6 @@
+@use "../src/style/partials/variables.scss" as *;
+@use "../src/style/partials/mixins.scss" as *;
+
 // REGOLE GENERALI CSS
 *{
     margin: 0;
@@ -11,4 +14,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+}
+
+body{
+    background-color: $bg_color;
 }

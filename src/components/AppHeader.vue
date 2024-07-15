@@ -14,9 +14,12 @@ export default{
 
 <template>
     <header>
+        <!-- Titolo -->
         <h1>
             BOOLFIX
         </h1>
+
+        <!-- Contenitore tool di ricerca -->
         <div class="console-search">
             <input v-model="store.movieText" type="text" @keyup.enter="$emit(`search`)" placeholder="Cerca un nuovo film">
             <button @click="$emit(`search`)">Cerca</button>
@@ -26,14 +29,15 @@ export default{
 </template>
 
 <style lang="scss" scoped>
+@use "../src/style/partials/variables.scss" as *;
+@use "../src/style/partials/mixins.scss" as *;
 
     header{
         height: 100px;
-        background-color: #0c0c0c;
-        display: flex;
+        background-color: $second_color;
+        @include centerFlex();
         justify-content: space-between;
-        align-items: center;
-        color: #e50914;
+        color: $text_color;
 
         h1{
             margin-left: 10px;
@@ -51,7 +55,7 @@ export default{
 
             button{
                 background-color: #fff;
-                color: #0c0c0c;
+                color: $second_color;
                 border: none; 
                 border-radius: 10px; 
                 cursor: pointer;

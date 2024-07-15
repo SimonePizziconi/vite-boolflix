@@ -36,6 +36,8 @@ export default{
           store.movieText = "",
           console.log(endPoint);
       }
+
+      // Chiamata per i fil
       axios.
       get(endPoint)
       .then(result => {
@@ -46,6 +48,7 @@ export default{
         console.log(error);
       })
 
+      // Chiamata per le serie tv
       axios.
       get(endPointSeries)
       .then(result => {
@@ -65,9 +68,9 @@ export default{
       } else if (language === 'es') {
           return 'fi fi-es';
       } else if (language === 'en') {
-          return 'fi fi-gb'; // Inghilterra
+          return 'fi fi-gb'; 
       } else if (language === 'us') {
-          return 'fi fi-us'; // Stati Uniti
+          return 'fi fi-us'; 
       } else {
           return 'fi fi-xx';
       }
@@ -80,6 +83,7 @@ export default{
   created(){
     this.getCharactersFilms();
   },
+  // Computed per prendere url immagine completo
   computed:{
     fullImageUrl() {
         return function(path) {
@@ -96,20 +100,31 @@ export default{
 <template>
   <AppHeader @search="getCharactersFilms"/>
   <main>
-    <h1>FILM</h1>
+    <!-- Contenitore delle schede dei film -->
     <div class="container">
+      <h2 v-if="store.movieList.length > 1">FILM</h2>
       <AppCardFilm :movies="store.movieList" :tvSeries="store.tvSeriesList" :getFlagClass="getFlagClass" :convertVoteToFiveScale="convertVoteToFiveScale" :fullImageUrl="fullImageUrl"/>
+    </div>
+    <!-- Contenitore delle schede delle serie tv -->
+    <div class="container">
+      <h2 v-if="store.movieList.length > 1">SERIE TV</h2>
       <AppCardTvSeries :movies="store.movieList" :tvSeries="store.tvSeriesList" :getFlagClass="getFlagClass" :convertVoteToFiveScale="convertVoteToFiveScale" :fullImageUrl="fullImageUrl"/>
     </div>
   </main>
   
 </template>
 
-<style>
+<style lang="scss" scoped>
+@use "../src/style/partials/variables.scss" as *;
 
-  main{
-    background-color: #141414;
+  main {
+    background-color: $bg_color;
+
+    h2 {
+      width: 100%;
+      margin-top: 20px;
+      color: $text_color;
+    }
   }
-
 
 </style>
